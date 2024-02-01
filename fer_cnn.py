@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from torchvision import transforms, datasets
 from sklearn.metrics import accuracy_score, confusion_matrix
 import random
-import os
+import numpy as np
 
 # WandB - Initialize a new run
 wandb.init(project='facial-emotion-recognition',
@@ -129,6 +129,14 @@ torch.save(model.state_dict(), 'emotion-classifier.pth')
 
 # Confusion matrix
 cm = confusion_matrix(all_labels, all_preds)
+
+# Calculate the accuracy per class
+class_wise_accuracy = np.diag(cm) / np.sum(cm, axis=1)
+
+# Print the class-wise accuracy
+class_names = ["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise", "Neutral"]
+for i, accuracy in enumerate(class_wise_accuracy):
+    print(f"Accuracy for class {class_names[i]}: {accuracy: .2f}")
 
 # Log the confusion matrix
 wandb.log({"conf_mat": wandb.plot.confusion_matrix(probs=None,
