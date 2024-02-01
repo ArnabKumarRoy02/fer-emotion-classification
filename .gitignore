@@ -2,7 +2,14 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+fer-2013/
+.DS_Store
+FER\ Analysis.numbers
+FER\ Presentation.key
+Patt-lite\ Research\ Paper.pdf
+PattLite\ -\ A\ Summary.pages
+result.csv
+wandb/
 # C extensions
 *.so
 
